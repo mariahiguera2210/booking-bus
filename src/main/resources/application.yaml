@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: booking-bus
+  datasource:
+    password: 'maria123'
+    url: jdbc:postgresql://localhost:5432/booking-bus
+    username: booking-bus
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    mongodb:
+      uri : mongodb+srv://maria123:maria123!@cluster1.d2syl4q.mongodb.net/booking-bus
+      auto-index-creation: true
+
+
+
+
+
+
+
+
+
