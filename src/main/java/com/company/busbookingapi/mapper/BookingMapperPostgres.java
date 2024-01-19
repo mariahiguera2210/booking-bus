@@ -13,7 +13,7 @@ import java.util.List;
 public interface BookingMapperPostgres extends IBaseMapper {
     @Mapping(source = "id", target = "id", qualifiedByName = "objectToInteger")
     BookingPostgres toEntity(BookingDto dto);
-    BookingPostgres toDto(BookingPostgres entity);
+    BookingDto toDto(BookingPostgres entity);
     List<BookingPostgres> toEntityList(List<BookingDto> dtoList);
     List<BookingDto> toDtoList(List<BookingPostgres> entityList);
     @Named("objectToInteger")

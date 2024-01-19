@@ -28,16 +28,20 @@ public class BookingServicePostgres implements BookingService<BookingDto> {
 
     @Override
     public BookingDto findById(Object id) throws Exception {
-        return null;
+        BookingPostgres bookingPostgres = bookingPostgresRepository.findById(Integer.valueOf(id.toString()))
+                .orElseThrow(() -> new Exception("Data not found"));
+        return mapper.toDto(bookingPostgres);
     }
 
     @Override
     public List<BookingDto> findAll() {
-        return null;
+        List<BookingPostgres> bookings = bookingPostgresRepository.findAll();
+        return mapper.toDtoList(bookings);
     }
 
     @Override
     public void delete(Object id) {
+        bookingPostgresRepository.deleteById(Integer.valueOf(id.toString()));
 
     }
 }
