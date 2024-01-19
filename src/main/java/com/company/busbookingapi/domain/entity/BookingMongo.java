@@ -16,6 +16,7 @@ import java.time.LocalTime;
 public class BookingMongo {
 
     @Id
+    private String id;
     private String name;
     private String email;
     private String origin;

@@ -1,25 +1,26 @@
 package com.company.busbookingapi.controller;
 
 import com.company.busbookingapi.BookingService;
-import com.company.busbookingapi.domain.dto.GenericDto;
+import com.company.busbookingapi.domain.dto.BookingDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/booking")
-public class Controller<T> {
+public class Controller {
 
-    private final BookingService<T, ?> bookingService;
+    private final BookingService<BookingDto> bookingService;
 
-    public Controller(BookingService<T, ?> bookingService) {
+    public Controller(BookingService<BookingDto> bookingService) {
         this.bookingService = bookingService;
     }
 
     @PostMapping()
-    public ResponseEntity<T> saveBooking(@RequestBody T entity) {
-        T savedEntity = bookingService.save(entity);
-        return new ResponseEntity<>(savedEntity, HttpStatus.CREATED);
-    }
+   public ResponseEntity<?> saveBooking(@RequestBody  BookingDto bookingDto) {
+        bookingService.save(bookingDto);
+       return new ResponseEntity<>("guardado", HttpStatus.CREATED);
+   }
 }
 
 

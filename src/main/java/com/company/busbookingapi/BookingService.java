@@ -1,13 +1,11 @@
 package com.company.busbookingapi;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface BookingService<T, ID> {
-    T save(T entity);
-    Optional<T> findById(ID id);
+public interface BookingService<T> {
+    void save(T dto);
+    T findById(Object id) throws Exception;
     List<T> findAll();
-    void deleteById(ID id);
-    void delete(T entity);
+    void delete(Object id);
 
 }

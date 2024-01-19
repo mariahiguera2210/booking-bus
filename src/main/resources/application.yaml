@@ -2,15 +2,15 @@ server:
   port: 8080
 spring:
   application:
-    name: booking-bus
+    name: reservas
   datasource:
     password: 'maria123'
-    url: jdbc:postgresql://localhost:5432/booking-bus
-    username: booking-bus
+    url: jdbc:postgresql://localhost:5432/reservation-system
+    username: reservas
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:

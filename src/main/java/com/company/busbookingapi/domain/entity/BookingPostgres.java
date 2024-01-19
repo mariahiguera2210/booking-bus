@@ -18,7 +18,15 @@ import java.util.Objects;
 public class BookingPostgres {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "booking_id_sequence",
+            sequenceName = "booking_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "booking_id_sequence"
+            )
+    private Integer id;
     private String name;
     private String email;
     private String origin;

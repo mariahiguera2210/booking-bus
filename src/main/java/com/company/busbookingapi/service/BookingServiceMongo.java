@@ -1,52 +1,48 @@
 package com.company.busbookingapi.service;
 
 import com.company.busbookingapi.BookingService;
-import com.company.busbookingapi.domain.dto.BookingMongoDto;
-import com.company.busbookingapi.domain.dto.GenericDto;
+import com.company.busbookingapi.domain.dto.BookingDto;
 import com.company.busbookingapi.domain.entity.BookingMongo;
 import com.company.busbookingapi.domain.repository.BookingMongoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.busbookingapi.mapper.BookingMapperMongo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class BookingServiceMongo implements BookingService<BookingMongo, String>{
+public class BookingServiceMongo implements BookingService<BookingDto>{
 
-    @Autowired
     private final BookingMongoRepository bookingMongoRepository;
+    private final BookingMapperMongo mapper;
 
-    public BookingServiceMongo(BookingMongoRepository bookingMongoRepository) {
+    public BookingServiceMongo(BookingMongoRepository bookingMongoRepository, BookingMapperMongo mapper) {
         this.bookingMongoRepository = bookingMongoRepository;
+        this.mapper = mapper;
+    }
+
+
+    @Override
+    public void save(BookingDto dto) {
+        BookingMongo bookingMongo = mapper.toEntity(dto);
+        bookingMongoRepository.save(bookingMongo);
     }
 
     @Override
-    public BookingMongo save(BookingMongo entity) {
-        return bookingMongoRepository.save(entity);
+    public BookingDto findById(Object id) throws Exception {
+        BookingMongo bookingMongo = bookingMongoRepository.findById(id.toString())
+                .orElseThrow(() -> new Exception("Data not found"));
+        return mapper.toDto(bookingMongo);
+
+    }
+    @Override
+    public List<BookingDto> findAll() {
+        List<BookingMongo> bookings = bookingMongoRepository.findAll();
+        return mapper.toDtoList(bookings);
     }
 
     @Override
-    public Optional<BookingMongo> findById(String id) {
-        return bookingMongoRepository.findById(id);
+    public void delete(Object id) {
+        bookingMongoRepository.deleteById(id.toString());
 
     }
-
-    @Override
-    public List<BookingMongo> findAll() {
-        return bookingMongoRepository.findAll();
-    }
-
-    @Override
-    public void deleteById(String id) {
-         bookingMongoRepository.deleteById(id);
-
-    }
-
-    @Override
-    public void delete(BookingMongo entity) {
-
-    }
-
-
 }
