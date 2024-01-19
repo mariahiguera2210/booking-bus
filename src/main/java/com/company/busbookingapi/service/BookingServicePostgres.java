@@ -38,7 +38,6 @@ public class BookingServicePostgres implements BookingService<BookingDto> {
         List<BookingPostgres> bookings = bookingPostgresRepository.findAll();
         return mapper.toDtoList(bookings);
     }
-
     @Override
     public void delete(Object id) {
         bookingPostgresRepository.deleteById(Integer.valueOf(id.toString()));

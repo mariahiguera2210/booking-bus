@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @Builder
-@Document(collation = "booking")
+@Document(collection = "booking")
 public class BookingMongo {
 
     @Id
